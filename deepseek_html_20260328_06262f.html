@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ĀyurVana | Ayurvedic Healing Clinic</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #FEFAF0;
+      color: #2C2A24;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* earthy palette */
+    :root {
+      --green-deep: #2F5D3A;
+      --green-soft: #6C8B6B;
+      --bark: #8B5A2B;
+      --clay: #C9A87C;
+      --sand: #F5E9DA;
+      --white: #FFFFFF;
+      --shadow-sm: 0 8px 20px rgba(0,0,0,0.05);
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    /* container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* buttons & inputs */
+    button, .btn {
+      background: var(--green-deep);
+      color: white;
+      border: none;
+      padding: 0.9rem 1.8rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    button:hover, .btn:hover {
+      background: #1E4227;
+      transform: scale(0.98);
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 1px solid #E2D9CD;
+      border-radius: 28px;
+      font-size: 1rem;
+      background: white;
+      outline: none;
+      transition: 0.2s;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--green-deep);
+      box-shadow: 0 0 0 2px rgba(47,93,58,0.2);
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    /* header & hamburger */
+    header {
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(2px);
+      background: rgba(255,250,240,0.96);
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--green-deep);
+      letter-spacing: -0.3px;
+    }
+    .logo i {
+      color: var(--bark);
+      margin-right: 0.3rem;
+    }
+    .hamburger {
+      font-size: 1.9rem;
+      background: none;
+      color: var(--green-deep);
+      padding: 0.2rem;
+      width: auto;
+      border-radius: 12px;
+    }
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      background: white;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 20px 25px -12px rgba(0,0,0,0.1);
+      border-radius: 0 0 28px 28px;
+      z-index: 999;
+    }
+    .nav-links.active {
+      display: flex;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #3A3A33;
+      transition: 0.2s;
+      font-size: 1.1rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #EFE5D8;
+    }
+    .nav-links a:hover {
+      color: var(--green-deep);
+      padding-left: 8px;
+    }
+
+    /* sections */
+    section {
+      padding: 4rem 0;
+      scroll-margin-top: 90px;
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      width: 60%;
+      height: 3px;
+      background: var(--bark);
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      border-radius: 4px;
+    }
+    .bg-soft {
+      background-color: #FCF5E8;
+    }
+
+    /* cards grid */
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: 1fr;
+    }
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s;
+      border: 1px solid #EFE3D4;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .doctor-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .doctor-img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      border: 4px solid var(--clay);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      text-align: center;
+      background: var(--green-deep);
+      color: white;
+      border-radius: 48px;
+      padding: 2rem 1.5rem;
+      margin: 2rem 0;
+    }
+    .stat-number {
+      font-size: 2.4rem;
+      font-weight: 800;
+    }
+    /* FAQ */
+    .faq-item {
+      background: white;
+      margin-bottom: 1rem;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid #EADFCB;
+    }
+    .faq-question {
+      background: white;
+      padding: 1.2rem 1.5rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq-question i {
+      color: var(--bark);
+    }
+    .faq-answer {
+      padding: 0 1.5rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: #FEF9F0;
+      border-top: 0px solid #EFE3D4;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+      padding: 0 1.5rem 1.2rem 1.5rem;
+      border-top: 1px solid #EFE3D4;
+    }
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-between;
+    }
+    .contact-info {
+      flex: 1;
+    }
+    .contact-form {
+      flex: 1.2;
+    }
+    .whatsapp-call {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    footer {
+      background: #EEDFCB;
+      padding: 2rem 0;
+      text-align: center;
+      color: #4A3A2A;
+    }
+    @media (min-width: 768px) {
+      .hamburger {
+        display: none;
+      }
+      .nav-links {
+        display: flex !important;
+        flex-direction: row;
+        position: static;
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+        width: auto;
+        gap: 2rem;
+      }
+      .nav-links a {
+        border-bottom: none;
+        padding: 0;
+      }
+      .grid-2 { grid-template-columns: repeat(2,1fr); }
+      .grid-3 { grid-template-columns: repeat(3,1fr); }
+      .grid-4 { grid-template-columns: repeat(4,1fr); }
+      .stat-grid { grid-template-columns: repeat(4,1fr); }
+      .section-title { font-size: 2.4rem; }
+    }
+    .hero {
+      background: linear-gradient(0deg, rgba(47,93,58,0.7), rgba(47,93,58,0.5)), url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      border-radius: 0 0 48px 48px;
+      color: white;
+      text-align: center;
+      padding: 5rem 1rem;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+    }
+    .btn-outline-light {
+      background: transparent;
+      border: 2px solid white;
+    }
+    .btn-outline-light:hover {
+      background: white;
+      color: var(--green-deep);
+    }
+    .testimonial i {
+      color: var(--bark);
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+    }
+    .inline-icon {
+      margin-right: 0.5rem;
+      color: var(--green-deep);
+    }
+    button i, .btn i {
+      pointer-events: none;
+    }
+    /* fallback image styles */
+    .fallback-img {
+      background: linear-gradient(135deg, #6C8B6B, #2F5D3A);
+      min-height: 200px;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+    }
+    .doctor-fallback {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8B5A2B, #C9A87C);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      border: 4px solid var(--clay);
+    }
+    img {
+      background-color: #E2D9CD;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="logo"><i class="fas fa-leaf"></i> ĀyurVana</div>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><i class="fas fa-bars"></i></button>
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#treatments">Treatments</a>
+      <a href="#doctor">Doctor</a>
+      <a href="#packages">Packages</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section id="home" style="padding-top:0;">
+    <div class="hero">
+      <div class="container">
+        <h1>Harmony of Doshas<br>Ancient Wisdom, Modern Care</h1>
+        <p style="font-size:1.2rem; margin: 1rem 0;">Experience authentic Ayurveda & Panchakarma</p>
+        <a href="#appointment" class="btn" style="background: white; color:#2F5D3A; margin-top:0.5rem;"><i class="fas fa-calendar-alt"></i> Book Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Ayurveda -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Ayurveda</h2>
+      <div class="grid-2">
+        <div>
+          <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=1200&q=80" 
+               alt="Ayurvedic herbs" 
+               loading="lazy" 
+               style="border-radius: 28px; width:100%;"
+               onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div class=\'fallback-img\' style=\'min-height:260px; border-radius:28px; background:linear-gradient(135deg, #6C8B6B, #2F5D3A); display:flex; align-items:center; justify-content:center; color:white;\'><i class=\'fas fa-leaf\' style=\'font-size:3rem; margin-right:0.5rem;\'></i> Ayurvedic Herbs</div>'">
+        </div>
+        <div><p>Ayurveda, the 5000-year-old "Science of Life", restores balance between body, mind, and spirit. At ĀyurVana, we blend traditional therapies with personalized wellness plans, using authentic herbs, diet, and detox to rejuvenate your inner vitality.</p><p style="margin-top:1rem;">Rooted in nature, guided by ancient texts, we empower natural healing.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Doctor profile - FIXED with working image -->
+  <section id="doctor" class="bg-soft">
+    <div class="container">
+      <h2 class="section-title">Lead Vaidya</h2>
+      <div class="grid-2" style="align-items: center;">
+        <div class="doctor-card" style="background: transparent; box-shadow: none;" id="doctorContainer">
+          <!-- Using a reliable, working Ayurvedic doctor image from Unsplash -->
+          <img class="doctor-img" src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80" 
+               alt="Dr. Anand Sharma - Senior Ayurvedic Vaidya" 
+               loading="lazy"
+               onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'doctor-fallback\' style=\'width:180px; height:180px; border-radius:50%; background:linear-gradient(135deg, #8B5A2B, #C9A87C); display:flex; align-items:center; justify-content:center; margin-bottom:1rem;\'><i class=\'fas fa-user-md\' style=\'font-size:4rem; color:white;\'></i></div><h3>Dr. Anand Sharma</h3><p>B.A.M.S, MD (Ayurveda)</p>'">
+          <h3>Dr. Anand Sharma</h3>
+          <p>B.A.M.S, MD (Ayurveda)</p>
+        </div>
+        <div><p>With 18+ years of experience, Dr. Anand is a renowned Panchakarma specialist and a passionate advocate of holistic wellness. He integrates traditional diagnosis (Nadi Pariksha) with compassionate care to treat chronic ailments and lifestyle disorders.</p><p><i class="fas fa-quote-left" style="color: var(--bark);"></i> True healing emerges when we align with nature's rhythm.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Treatments -->
+  <section id="treatments">
+    <div class="container">
+      <h2 class="section-title">Our Therapies</h2>
+      <div class="grid-3">
+        <div class="card"><i class="fas fa-oil-can" style="font-size:2rem; color:var(--green-deep);"></i><h3>Panchakarma</h3><p>Deep detoxification with Vamana, Virechana, Basti – complete mind-body purification.</p></div>
+        <div class="card"><i class="fas fa-seedling" style="font-size:2rem; color:var(--green-deep);"></i><h3>Detox Therapy</h3><p>Gentle cleansing using herbal enemas, diet, and lifestyle reset for toxin elimination.</p></div>
+        <div class="card"><i class="fas fa-mortar-pestle" style="font-size:2rem; color:var(--green-deep);"></i><h3>Herbal Therapy</h3><p>Custom herbal blends, decoctions & rasayanas to boost immunity & vitality.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits & Why choose us -->
+  <section id="benefits" class="bg-soft">
+    <div class="container">
+      <h2 class="section-title">Key Benefits</h2>
+      <div class="grid-2" style="margin-bottom: 2rem;">
+        <ul style="list-style: none;"><li><i class="fas fa-check-circle" style="color:var(--green-deep);"></i> 100% Natural & Organic</li><li><i class="fas fa-check-circle"></i> Personalized constitution (Prakriti) analysis</li><li><i class="fas fa-check-circle"></i> Stress & immunity restoration</li></ul>
+        <ul style="list-style: none;"><li><i class="fas fa-check-circle"></i> Drugless pain management</li><li><i class="fas fa-check-circle"></i> Long-term lifestyle guidance</li><li><i class="fas fa-check-circle"></i> Sustainable wellness</li></ul>
+      </div>
+      <h2 class="section-title">Why Choose Us</h2>
+      <div class="grid-3">
+        <div class="card"><i class="fas fa-user-md fa-2x"></i><h3>Expertise</h3><p>Certified BAMS doctors & trained therapists</p></div>
+        <div class="card"><i class="fas fa-spa fa-2x"></i><h3>Authentic Lineage</h3><p>Traditional Kerala therapies & classical formulations</p></div>
+        <div class="card"><i class="fas fa-hand-holding-heart fa-2x"></i><h3>Personalized Care</h3><p>Tailored plans & follow-ups</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNTERS section -->
+  <div class="container">
+    <div class="stat-grid" id="statsSection">
+      <div><div class="stat-number" id="stat1" data-target="28">0</div><p>Years of Legacy</p></div>
+      <div><div class="stat-number" id="stat2" data-target="12500">0</div><p>Happy Patients</p></div>
+      <div><div class="stat-number" id="stat3" data-target="45">0</div><p>Expert Therapists</p></div>
+      <div><div class="stat-number" id="stat4" data-target="100">0</div><p>Herbal Formulations</p></div>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Sacred Stories</h2>
+      <div class="grid-3">
+        <div class="card testimonial"><i class="fas fa-quote-right"></i><p>"Panchakarma at ĀyurVana healed my chronic fatigue. Truly life-changing!"</p><h4>— Meera K.</h4></div>
+        <div class="card testimonial"><i class="fas fa-quote-right"></i><p>"The herbal therapy and diet plan reversed my metabolic issues. Highly recommend."</p><h4>— Rohan S.</h4></div>
+        <div class="card testimonial"><i class="fas fa-quote-right"></i><p>"Authentic, peaceful environment. Dr. Anand's care is exceptional."</p><h4>— Nisha P.</h4></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Packages -->
+  <section id="packages" class="bg-soft">
+    <div class="container">
+      <h2 class="section-title">Wellness Packages</h2>
+      <div class="grid-3">
+        <div class="card"><h3>Rejuvenation Escape</h3><p>7-day detox + Abhyanga + Shirodhara + diet</p><p class="stat-number" style="color:var(--bark); font-size:1.8rem;">₹12,500</p><button class="btn" style="width:100%; margin-top:0.8rem;">Enquire</button></div>
+        <div class="card"><h3>Panchakarma Intensive</h3><p>14-day full detox, Basti, Virechana + follow-up</p><p class="stat-number" style="color:var(--bark); font-size:1.8rem;">₹24,900</p><button class="btn" style="width:100%;">Book Now</button></div>
+        <div class="card"><h3>Herbal Immunity Booster</h3><p>1-month Rasayana kit + diet consultation</p><p class="stat-number" style="color:var(--bark); font-size:1.8rem;">₹6,499</p><button class="btn" style="width:100%;">Subscribe</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Accordion -->
+  <section id="faq">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <div class="faq-item"><div class="faq-question">Is Ayurveda safe alongside modern medicine? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Yes, but always inform our Vaidya about any ongoing medications for a safe integrated plan.</div></div>
+        <div class="faq-item"><div class="faq-question">How long does Panchakarma take? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Typically 7 to 21 days depending on individual constitution and health goals.</div></div>
+        <div class="faq-item"><div class="faq-question">Do you offer online consultations? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Absolutely, we provide virtual consultations & herbal delivery across India.</div></div>
+        <div class="faq-item"><div class="faq-question">What herbs do you use? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">We use organic, ethically sourced herbs like Ashwagandha, Triphala, Tulsi & more.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section id="blog" class="bg-soft">
+    <div class="container">
+      <h2 class="section-title">ĀyurBlog</h2>
+      <div class="grid-2">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=1200&q=80" 
+               loading="lazy" 
+               alt="herbal tea" 
+               style="border-radius: 24px; width:100%;"
+               onerror="this.onerror=null; this.style.display='none'; this.parentElement.insertAdjacentHTML('afterbegin', '<div class=\'fallback-img\' style=\'min-height:180px; border-radius:24px; margin-bottom:1rem; background:linear-gradient(135deg, #8B5A2B, #C9A87C); display:flex; align-items:center; justify-content:center; color:white;\'><i class=\'fas fa-mortar-pestle\' style=\'font-size:2rem;\'></i></div>');">
+          <h3>5 Ayurvedic Herbs for Immunity</h3><p>Boost your defense with Giloy, Tulsi, and Amla — ancient secrets.</p><a href="#" style="color:var(--green-deep);">Read more →</a>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80" 
+               loading="lazy" 
+               alt="yoga" 
+               style="border-radius: 24px; width:100%;"
+               onerror="this.onerror=null; this.style.display='none'; this.parentElement.insertAdjacentHTML('afterbegin', '<div class=\'fallback-img\' style=\'min-height:180px; border-radius:24px; margin-bottom:1rem; background:linear-gradient(135deg, #2F5D3A, #6C8B6B); display:flex; align-items:center; justify-content:center; color:white;\'><i class=\'fas fa-om\' style=\'font-size:2rem;\'></i></div>');">
+          <h3>Dinacharya: Daily Rituals</h3><p>Align your circadian rhythm for better sleep and digestion.</p><a href="#" style="color:var(--green-deep);">Explore →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Appointment Form + Contact -->
+  <section id="appointment">
+    <div class="container">
+      <h2 class="section-title">Book Your Consultation</h2>
+      <div class="contact-row">
+        <div class="contact-form">
+          <form id="appointmentForm">
+            <div class="form-group"><input type="text" placeholder="Full Name" required></div>
+            <div class="form-group"><input type="email" placeholder="Email" required></div>
+            <div class="form-group"><input type="tel" placeholder="Phone" required></div>
+            <div class="form-group"><input type="date" required></div>
+            <div class="form-group"><textarea rows="2" placeholder="Describe your concern"></textarea></div>
+            <button type="submit" class="btn" style="width:100%;"><i class="fas fa-leaf"></i> Request Appointment</button>
+          </form>
+        </div>
+        <div class="contact-info" id="contact">
+          <h3>Visit Our Sanctuary</h3>
+          <p><i class="fas fa-map-marker-alt"></i> 22, Vaidya Marg, Dhanvantari Nagar, Jaipur, India</p>
+          <p><i class="fas fa-phone-alt"></i> <a href="tel:+917897464377" style="color: var(--green-deep); text-decoration: none;">+91 78974 64377</a></p>
+          <p><i class="fas fa-envelope"></i> hello@ayurvana.com</p>
+          <div class="whatsapp-call">
+            <a href="https://wa.me/917897464377?text=Hello%2C%20I%20need%20Ayurvedic%20consultation" target="_blank" class="btn" style="background:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="tel:+917897464377" class="btn" style="background: var(--bark);"><i class="fas fa-phone"></i> Call Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p><i class="fas fa-om"></i> ĀyurVana — Healing in harmony with nature</p>
+    <p>© 2025 | All therapies are administered under expert guidance</p>
+  </div>
+</footer>
+
+<script>
+  // HAMBURGER
+  const hamburger = document.getElementById('hamburgerBtn');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+    });
+  });
+
+  // SMOOTH SCROLL
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if(targetId === "#" || targetId === "") return;
+      const targetElem = document.querySelector(targetId);
+      if(targetElem) {
+        e.preventDefault();
+        targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // FAQ ACCORDION
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const questionDiv = item.querySelector('.faq-question');
+    questionDiv.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+      faqItems.forEach(i => i.classList.remove('active'));
+      if(!isActive) item.classList.add('active');
+    });
+  });
+
+  // COUNTERS with Intersection Observer
+  const counters = [
+    { element: document.getElementById('stat1'), target: 28, current: 0 },
+    { element: document.getElementById('stat2'), target: 12500, current: 0 },
+    { element: document.getElementById('stat3'), target: 45, current: 0 },
+    { element: document.getElementById('stat4'), target: 100, current: 0 }
+  ];
+  let counted = false;
+  function startCounters() {
+    if(counted) return;
+    counted = true;
+    counters.forEach(counter => {
+      const updateCounter = () => {
+        let step = Math.ceil(counter.target / 50);
+        if (step < 1) step = 1;
+        if (counter.current < counter.target) {
+          counter.current += step;
+          if (counter.current > counter.target) counter.current = counter.target;
+          counter.element.innerText = counter.current.toLocaleString();
+          requestAnimationFrame(updateCounter);
+        } else {
+          counter.element.innerText = counter.target.toLocaleString();
+        }
+      };
+      updateCounter();
+    });
+  }
+  const statsSection = document.getElementById('statsSection');
+  const observer = new IntersectionObserver((entries) => {
+    if(entries[0].isIntersecting) {
+      startCounters();
+      observer.unobserve(statsSection);
+    }
+  }, { threshold: 0.4 });
+  if(statsSection) observer.observe(statsSection);
+
+  // APPOINTMENT FORM ALERT
+  const form = document.getElementById('appointmentForm');
+  if(form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert("🙏 Thank you! Our Vaidya will connect within 24 hours.");
+      form.reset();
+    });
+  }
+
+  // ensure all images lazy-load
+  document.querySelectorAll('img').forEach(img => img.setAttribute('loading', 'lazy'));
+</script>
+</body>
+</html>
